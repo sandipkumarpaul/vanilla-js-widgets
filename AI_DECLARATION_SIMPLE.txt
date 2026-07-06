@@ -1,0 +1,19 @@
+# AI Usage Declaration
+
+Student Name: Sandip Kumar Paul
+ID: 24241311
+Course: CSE391
+Assignment 2: JavaScript Programming (Fortune Generator, Stopwatch, To-Do List)
+
+## Declaration of AI Assistance
+
+In accordance with the assignment guidelines, I am declaring taking minor assistance from AI during the final review and polishing phases of this project.
+
+### How AI Was Utilized:
+The AI was used as a reviewer and formatter to ensure my completed project strictly adhered to the assignment constraints. Specifically, the AI assisted with the following:
+
+1. Code Validation: I used the AI to review my completed `index.html` file against the assignment requirements to ensure I hadn't missed any constraints. The AI successfully verified my logic and identified a minor layout constraint I had overlooked.
+2. Code Refactoring & Clean-up: The AI assisted in repositioning the Fortune Generator HTML section to strictly meet the layout instructions.
+
+### My Contribution:
+The core JavaScript logic (arrays, intervals, DOM manipulation, localStorage), HTML structuring, CSS styling, and the entire implementation of the three tasks (Fortune Generator, Stopwatch, To-Do List) were completely original and written by me. The AI acted merely as a final reviewer to validate my work and assist with minor formatting and clean-up tasks.
