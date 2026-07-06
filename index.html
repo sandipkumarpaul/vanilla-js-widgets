@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment 2 – JavaScript Programming</title>
+    <style>
+        
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f7fb;
+            color: #1e2a3a;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1.5rem 0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+            flex: 1;
+        }
+
+        .page-header {
+            text-align: center;
+            padding-bottom: 2rem;
+            border-bottom: 3px solid #d0dbe8;
+            margin-bottom: 2.5rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #0b2b44;
+            letter-spacing: -0.5px;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            color: #3e5a76;
+            margin-top: 0.3rem;
+        }
+
+        .task-section {
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 20, 40, 0.08);
+            padding: 2rem 2.2rem;
+            margin-bottom: 2.5rem;
+            border: 1px solid #e6edf4;
+            transition: box-shadow 0.2s;
+        }
+
+        .task-section:hover {
+            box-shadow: 0 12px 40px rgba(0, 20, 40, 0.12);
+        }
+
+        .task-section h2 {
+            font-size: 1.7rem;
+            font-weight: 600;
+            color: #0b2b44;
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .task-desc {
+            color: #4a6580;
+            margin-bottom: 1.6rem;
+            font-size: 0.98rem;
+            border-left: 4px solid #b3c9dd;
+            padding-left: 1rem;
+        }
+
+        .fortune-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1.2rem 1.8rem;
+            justify-content: center;
+            margin: 0.8rem 0 0.2rem;
+        }
+
+        .fortune-box {
+            flex: 1 1 280px;
+            min-height: 120px;
+            padding: 1.6rem 2rem;
+            border-radius: 16px;
+            border: 3px solid #2c5f8a;
+            background: #eef4fa;
+            color: #0b2b44;
+            font-size: 1.15rem;
+            font-weight: 500;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 12px rgba(44, 95, 138, 0.10);
+            word-break: break-word;
+            line-height: 1.5;
+        }
+
+        .fortune-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            justify-content: center;
+        }
+
+        .fortune-controls button {
+            padding: 0.5rem 1.2rem;
+            border: none;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            background: #eef4fa;
+            color: #1e2a3a;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+            transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .fortune-controls button:hover {
+            background: #dce6f0;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(44, 95, 138, 0.12);
+        }
+
+        .fortune-controls button:active {
+            transform: translateY(0);
+        }
+
+        .btn-font-color {
+            background: #dbeafe;
+            color: #1e4b7a;
+        }
+        .btn-font-color:hover {
+            background: #c0d9f5;
+        }
+
+        .btn-bg-color {
+            background: #e0f0e8;
+            color: #1a5a4a;
+        }
+        .btn-bg-color:hover {
+            background: #c6e4d8;
+        }
+
+        .btn-border-color {
+            background: #f0e8e0;
+            color: #7a4a1a;
+        }
+        .btn-border-color:hover {
+            background: #e6d8c8;
+        }
+
+        .btn-font-size {
+            background: #f0eaf5;
+            color: #5a3a7a;
+        }
+        .btn-font-size:hover {
+            background: #e2d8ec;
+        }
+
+        .stopwatch-display {
+            font-size: 5rem;
+            font-weight: 700;
+            text-align: center;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 2px;
+            color: #0b2b44;
+            background: #f0f5fa;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            display: inline-block;
+            min-width: 240px;
+            margin: 0.2rem 0 0.6rem;
+            border: 2px solid #d0dbe8;
+        }
+
+        .stopwatch-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            align-items: center;
+            justify-content: center;
+            margin-top: 0.6rem;
+        }
+
+        .stopwatch-controls button {
+            padding: 0.6rem 2rem;
+            border: none;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            min-width: 100px;
+        }
+
+        .stopwatch-controls button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+        }
+        .stopwatch-controls button:active {
+            transform: translateY(0);
+        }
+
+        .btn-start {
+            background: #1f8b4c;
+            color: #fff;
+        }
+        .btn-start:hover {
+            background: #167a3f;
+        }
+        .btn-start:disabled {
+            background: #94b8a8;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .btn-stop {
+            background: #b13e3e;
+            color: #fff;
+        }
+        .btn-stop:hover {
+            background: #9a3333;
+        }
+        .btn-stop:disabled {
+            background: #c9a0a0;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .btn-reset {
+            background: #5a6f85;
+            color: #fff;
+        }
+        .btn-reset:hover {
+            background: #4a5d72;
+        }
+
+        .stopwatch-status {
+            font-size: 0.9rem;
+            color: #4a6580;
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+
+        .todo-input-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-bottom: 1.6rem;
+        }
+
+        .todo-input-row input {
+            flex: 1 1 220px;
+            padding: 0.7rem 1.2rem;
+            border: 2px solid #d0dbe8;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border 0.2s, box-shadow 0.2s;
+            background: #fafcfe;
+        }
+
+        .todo-input-row input:focus {
+            border-color: #2c5f8a;
+            box-shadow: 0 0 0 4px rgba(44, 95, 138, 0.12);
+        }
+
+        .todo-input-row button {
+            padding: 0.7rem 2rem;
+            border: none;
+            border-radius: 40px;
+            background: #2c5f8a;
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 0 2px 8px rgba(44, 95, 138, 0.15);
+            white-space: nowrap;
+        }
+
+        .todo-input-row button:hover {
+            background: #1f4b6f;
+            transform: translateY(-2px);
+        }
+        .todo-input-row button:active {
+            transform: translateY(0);
+        }
+
+        .todo-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .todo-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.7rem 1.2rem 0.7rem 1rem;
+            background: #f8fafc;
+            border-radius: 14px;
+            border: 1px solid #e6edf4;
+            transition: background 0.15s, border-color 0.15s;
+        }
+
+        .todo-item:hover {
+            background: #f0f5fa;
+            border-color: #c8d6e4;
+        }
+
+        .todo-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #2c5f8a;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .todo-item .task-text {
+            flex: 1;
+            font-size: 1rem;
+            word-break: break-word;
+            transition: color 0.2s, text-decoration 0.2s;
+        }
+
+        .todo-item .task-text.completed {
+            text-decoration: line-through;
+            color: #8a9aac;
+        }
+
+        .todo-item .delete-btn {
+            background: transparent;
+            border: none;
+            font-size: 1.3rem;
+            line-height: 1;
+            color: #b13e3e;
+            cursor: pointer;
+            padding: 0.2rem 0.5rem;
+            border-radius: 30px;
+            transition: background 0.15s, color 0.15s;
+            flex-shrink: 0;
+        }
+
+        .todo-item .delete-btn:hover {
+            background: #fce8e8;
+            color: #8a2a2a;
+        }
+
+        .todo-empty {
+            color: #8a9aac;
+            text-align: center;
+            padding: 1.2rem 0;
+            font-style: italic;
+        }
+
+        .page-footer {
+            text-align: center;
+            padding: 1.8rem 0 1rem;
+            margin-top: 1rem;
+            border-top: 2px solid #d0dbe8;
+            color: #5a6f85;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 680px) {
+            body {
+                padding: 1.2rem 0.8rem 0;
+            }
+            .task-section {
+                padding: 1.4rem 1.2rem;
+            }
+            .fortune-wrapper {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .fortune-box {
+                min-height: 100px;
+                font-size: 1rem;
+                padding: 1.2rem;
+            }
+            .fortune-controls button {
+                padding: 0.4rem 0.9rem;
+                font-size: 0.8rem;
+                flex: 1 1 auto;
+            }
+            .stopwatch-display {
+                font-size: 3.6rem;
+                min-width: 160px;
+                padding: 0.2rem 0.8rem;
+            }
+            .stopwatch-controls button {
+                min-width: 70px;
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            .todo-input-row input {
+                flex: 1 1 140px;
+            }
+            .todo-input-row button {
+                padding: 0.6rem 1.2rem;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .fortune-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .fortune-controls button {
+                text-align: center;
+            }
+            .stopwatch-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .stopwatch-controls button {
+                width: 100%;
+            }
+            .todo-input-row {
+                flex-direction: column;
+            }
+            .todo-input-row input {
+                width: 100%;
+            }
+            .todo-input-row button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <header class="page-header">
+            <h1>📘 Assignment 2 &middot; JavaScript</h1>
+            <p>Fortune Generator &bull; Stopwatch &bull; To‑Do List</p>
+        </header>
+
+        <section class="task-section" id="task-stopwatch">
+            <h2>
+                ⏱️ Stopwatch
+            </h2>
+            <p class="task-desc">
+                Counts in steps of 3 seconds &bull; automatically stops at 30 seconds &bull;
+                resumes from where it was paused.
+            </p>
+
+            <div style="text-align:center;">
+                <div class="stopwatch-display" id="stopwatchDisplay">0</div>
+                <div class="stopwatch-controls">
+                    <button class="btn-start" id="swStart">▶ Start</button>
+                    <button class="btn-stop"  id="swStop" disabled>⏸ Stop</button>
+                    <button class="btn-reset" id="swReset">⟲ Reset</button>
+                </div>
+                <div class="stopwatch-status" id="swStatus">⏹ Ready</div>
+            </div>
+        </section>
+
+        <section class="task-section" id="task-todo">
+            <h2>
+                ✅ To‑Do List
+            </h2>
+            <p class="task-desc">
+                Add, delete, and mark tasks complete &bull; tasks are saved in
+                <code>localStorage</code> so they persist after refresh.
+            </p>
+
+            <div class="todo-input-row">
+                <input type="text" id="todoInput" placeholder="What do you need to do?" />
+                <button id="todoAddBtn">➕ Add Task</button>
+            </div>
+
+            <ul class="todo-list" id="todoList">
+                
+            </ul>
+        </section>
+
+        <section class="task-section" id="task-fortune">
+            <h2>
+                🎱 Fortune Generator
+            </h2>
+            <p class="task-desc">
+                A random fortune appears on load. Use the four buttons to customise
+                the box's font colour, background colour, border colour, and font size &amp; family.
+            </p>
+
+            <div class="fortune-wrapper">
+                <div class="fortune-box" id="fortuneBox">
+                    <span id="fortuneText">✨ Your fortune awaits…</span>
+                </div>
+                <div class="fortune-controls">
+                    <button class="btn-font-color" id="btnFontColor"   title="Change font colour">🎨 Font</button>
+                    <button class="btn-bg-color"   id="btnBgColor"     title="Change background colour">🖌️ Bg</button>
+                    <button class="btn-border-color" id="btnBorderColor" title="Change border colour">🖼️ Border</button>
+                    <button class="btn-font-size"  id="btnFontSize"    title="Change font size &amp; family">🔤 Size</button>
+                </div>
+            </div>
+        </section>
+
+        <footer class="page-footer">
+            &copy; 2026 &bull; CSE 391 Assignment 2 &bull; JavaScript Programming
+        </footer>
+
+    </div>
+
+    <script>
+
+        (function fortuneModule() {
+
+            const fortunes = [
+                "True wisdom comes not from knowledge, but from understanding.",
+                "The only way to do great work is to love what you do.",
+                "In the middle of difficulty lies opportunity.",
+                "The best time to plant a tree was 20 years ago. The second best time is now.",
+                "It does not matter how slowly you go as long as you do not stop.",
+                "The future belongs to those who believe in the beauty of their dreams.",
+                "Life is what happens when you're busy making other plans.",
+                "The greatest glory in living lies not in never falling, but in rising every time we fall.",
+                "The way to get started is to quit talking and begin doing.",
+                "Your time is limited, so don't waste it living someone else's life.",
+                "The only thing we have to fear is fear itself.",
+                "To be or not to be, that is the question."
+            ];
+
+            const box = document.getElementById('fortuneBox');
+            const textEl = document.getElementById('fortuneText');
+
+            function pickRandomFortune() {
+                const idx = Math.floor(Math.random() * fortunes.length);
+                textEl.textContent = fortunes[idx];
+            }
+            pickRandomFortune();
+
+            const colourSets = {
+                font: ['#0b2b44', '#8a1a3a', '#1a6a4a', '#6a3a8a', '#b13e3e', '#2c5f8a'],
+                bg: ['#eef4fa', '#fce8e8', '#e8f5ee', '#f5eee8', '#f0eaf5', '#e0edf5'],
+                border: ['#2c5f8a', '#b13e3e', '#1a7a5a', '#8a6a1a', '#6a3a8a', '#3a6a8a']
+            };
+
+            let fontIdx = 0,
+                bgIdx = 0,
+                borderIdx = 0;
+
+            const sizeFamilyOptions = [
+                { size: '1.15rem', family: "'Segoe UI', Tahoma, sans-serif" },
+                { size: '1.5rem', family: "'Georgia', serif" },
+                { size: '1.05rem', family: "'Courier New', monospace" },
+                { size: '1.8rem', family: "'Trebuchet MS', sans-serif" },
+                { size: '1.25rem', family: "'Palatino', serif" }
+            ];
+            let sizeIdx = 0;
+
+            function applyFortuneStyles() {
+                box.style.color = colourSets.font[fontIdx];
+                box.style.backgroundColor = colourSets.bg[bgIdx];
+                box.style.borderColor = colourSets.border[borderIdx];
+                const opt = sizeFamilyOptions[sizeIdx];
+                box.style.fontSize = opt.size;
+                box.style.fontFamily = opt.family;
+            }
+            applyFortuneStyles();
+
+            document.getElementById('btnFontColor').addEventListener('click', function() {
+                fontIdx = (fontIdx + 1) % colourSets.font.length;
+                applyFortuneStyles();
+            });
+
+            document.getElementById('btnBgColor').addEventListener('click', function() {
+                bgIdx = (bgIdx + 1) % colourSets.bg.length;
+                applyFortuneStyles();
+            });
+
+            document.getElementById('btnBorderColor').addEventListener('click', function() {
+                borderIdx = (borderIdx + 1) % colourSets.border.length;
+                applyFortuneStyles();
+            });
+
+            document.getElementById('btnFontSize').addEventListener('click', function() {
+                sizeIdx = (sizeIdx + 1) % sizeFamilyOptions.length;
+                applyFortuneStyles();
+            });
+        })();
+
+        (function stopwatchModule() {
+
+            let currentTime = 0;
+            let timerId = null;
+            let isRunning = false;
+
+            const display = document.getElementById('stopwatchDisplay');
+            const statusEl = document.getElementById('swStatus');
+            const startBtn = document.getElementById('swStart');
+            const stopBtn = document.getElementById('swStop');
+            const resetBtn = document.getElementById('swReset');
+
+            function updateDisplay() {
+                display.textContent = currentTime;
+            }
+
+            function updateButtons() {
+                startBtn.disabled = isRunning || currentTime >= 30;
+                stopBtn.disabled = !isRunning;
+
+            }
+
+            function setStatus(msg) {
+                statusEl.textContent = msg;
+            }
+
+            function stopTimer() {
+                if (timerId) {
+                    clearInterval(timerId);
+                    timerId = null;
+                }
+                isRunning = false;
+                updateButtons();
+            }
+
+            function tick() {
+
+                currentTime += 3;
+
+                if (currentTime > 30) currentTime = 30;
+
+                updateDisplay();
+
+                if (currentTime >= 30) {
+                    stopTimer();
+                    setStatus('⏹ Stopped — reached 30 seconds');
+                    updateButtons();
+                    return;
+                }
+
+                updateButtons();
+                setStatus(`⏱ Running … ${currentTime}s`);
+            }
+
+            function startTimer() {
+                if (isRunning) return;
+                if (currentTime >= 30) {
+                    setStatus('⏹ Already at 30 seconds — reset to start again');
+                    return;
+                }
+
+                isRunning = true;
+                timerId = setInterval(tick, 3000);
+                setStatus(`▶ Running … ${currentTime}s`);
+                updateButtons();
+            }
+
+            function pauseTimer() {
+                if (!isRunning) return;
+                stopTimer();
+                setStatus(`⏸ Paused at ${currentTime}s`);
+                updateButtons();
+            }
+
+            function resetTimer() {
+                stopTimer();
+                currentTime = 0;
+                updateDisplay();
+                setStatus('⟲ Reset to 0');
+                updateButtons();
+            }
+
+            startBtn.addEventListener('click', startTimer);
+            stopBtn.addEventListener('click', pauseTimer);
+            resetBtn.addEventListener('click', resetTimer);
+
+            updateDisplay();
+            updateButtons();
+            setStatus('⏹ Ready');
+        })();
+
+        (function todoModule() {
+            const STORAGE_KEY = 'cse391_todo_tasks';
+
+            const input = document.getElementById('todoInput');
+            const addBtn = document.getElementById('todoAddBtn');
+            const listEl = document.getElementById('todoList');
+
+            function loadTasks() {
+                try {
+                    const raw = localStorage.getItem(STORAGE_KEY);
+                    if (raw) {
+                        const parsed = JSON.parse(raw);
+
+                        if (Array.isArray(parsed)) return parsed;
+                    }
+                } catch (_) {  }
+                return [];
+            }
+
+            let tasks = loadTasks();
+
+            function saveTasks() {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+            }
+
+            function genId() {
+                return Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 7);
+            }
+
+            function render() {
+                if (tasks.length === 0) {
+                    listEl.innerHTML = `<li class="todo-empty">✨ No tasks yet — add one above!</li>`;
+                    return;
+                }
+
+                let html = '';
+                for (const task of tasks) {
+                    const checked = task.completed ? 'checked' : '';
+                    const cls = task.completed ? 'task-text completed' : 'task-text';
+                    html += `
+                            <li class="todo-item" data-id="${task.id}">
+                                <input type="checkbox" class="todo-checkbox" ${checked} />
+                                <span class="${cls}">${escapeHtml(task.text)}</span>
+                                <button class="delete-btn" title="Delete task">✕</button>
+                            </li>
+                        `;
+                }
+                listEl.innerHTML = html;
+
+                listEl.querySelectorAll('.todo-item').forEach(li => {
+                    const id = li.dataset.id;
+                    const cb = li.querySelector('.todo-checkbox');
+                    const del = li.querySelector('.delete-btn');
+
+                    cb.addEventListener('change', function(e) {
+                        const task = tasks.find(t => t.id === id);
+                        if (task) {
+                            task.completed = this.checked;
+
+                            const span = li.querySelector('.task-text');
+                            if (span) {
+                                span.classList.toggle('completed', task.completed);
+                            }
+                            saveTasks();
+                        }
+                    });
+
+                    del.addEventListener('click', function() {
+                        tasks = tasks.filter(t => t.id !== id);
+                        saveTasks();
+                        render();
+                    });
+                });
+            }
+
+            function escapeHtml(str) {
+                const div = document.createElement('div');
+                div.textContent = str;
+                return div.innerHTML;
+            }
+
+            function addTask() {
+                const text = input.value.trim();
+                if (text === '') {
+                    input.focus();
+                    return;
+                }
+
+                tasks.push({
+                    id: genId(),
+                    text: text,
+                    completed: false
+                });
+                saveTasks();
+                input.value = '';
+                input.focus();
+                render();
+            }
+
+            addBtn.addEventListener('click', addTask);
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    addTask();
+                }
+            });
+
+            render();
+        })();
+    </script>
+
+</body>
+</html>
