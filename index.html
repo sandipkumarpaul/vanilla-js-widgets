@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Three small widgets (fortune generator, stopwatch, to-do list) built with plain HTML, CSS and JavaScript." />
+    <title>Vanilla JS Widgets</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧩</text></svg>" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/fortune.js" defer></script>
+    <script src="js/stopwatch.js" defer></script>
+    <script src="js/todo.js" defer></script>
+</head>
+
+<body>
+    <div class="container">
+
+        <header class="page-header">
+            <h1>🧩 Vanilla JS Widgets</h1>
+            <p>Fortune Generator &bull; Stopwatch &bull; To‑Do List</p>
+        </header>
+
+        <main class="widgets">
+
+            <section class="task-section" id="task-fortune" aria-labelledby="fortune-heading">
+                <h2 id="fortune-heading">🎱 Fortune Generator</h2>
+                <p class="task-desc">
+                    A random fortune appears on load. Customise the box's text colour,
+                    background, border, and font.
+                </p>
+
+                <div class="fortune-wrapper">
+                    <div class="fortune-box" id="fortuneBox" aria-live="polite">
+                        <span id="fortuneText">✨ Your fortune awaits…</span>
+                    </div>
+                    <div class="fortune-controls">
+                        <button class="btn-new-fortune" id="btnNewFortune">🔮 New fortune</button>
+                        <button class="btn-font-color" id="btnFontColor" title="Change text colour">🎨 Text colour</button>
+                        <button class="btn-bg-color" id="btnBgColor" title="Change background colour">🖌️ Background</button>
+                        <button class="btn-border-color" id="btnBorderColor" title="Change border colour">🖼️ Border</button>
+                        <button class="btn-font-size" id="btnFontSize" title="Change font size &amp; family">🔤 Font</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="task-section" id="task-stopwatch" aria-labelledby="stopwatch-heading">
+                <h2 id="stopwatch-heading">⏱️ Stopwatch</h2>
+                <p class="task-desc">
+                    Counts in steps of 3 seconds &bull; stops automatically at 30 seconds &bull;
+                    resumes from where it was paused.
+                </p>
+
+                <div class="stopwatch">
+                    <div class="stopwatch-display" aria-live="polite">
+                        <span id="stopwatchDisplay">0</span><span class="stopwatch-unit">s</span>
+                    </div>
+                    <div class="stopwatch-progress" id="swProgress" role="progressbar"
+                         aria-label="Progress to 30 seconds" aria-valuemin="0" aria-valuemax="30" aria-valuenow="0">
+                        <div class="stopwatch-progress-fill" id="swProgressFill"></div>
+                    </div>
+                    <div class="stopwatch-controls">
+                        <button class="btn-start" id="swStart">▶ Start</button>
+                        <button class="btn-stop" id="swStop" disabled>⏸ Stop</button>
+                        <button class="btn-reset" id="swReset">⟲ Reset</button>
+                    </div>
+                    <div class="stopwatch-status" id="swStatus">⏹ Ready</div>
+                </div>
+            </section>
+
+            <section class="task-section task-section--wide" id="task-todo" aria-labelledby="todo-heading">
+                <h2 id="todo-heading">✅ To‑Do List</h2>
+                <p class="task-desc">
+                    Add, delete, and mark tasks complete &bull; tasks are saved in
+                    <code>localStorage</code> so they persist after refresh.
+                </p>
+
+                <form class="todo-input-row" id="todoForm" autocomplete="off">
+                    <label for="todoInput" class="visually-hidden">New task</label>
+                    <input type="text" id="todoInput" maxlength="200" placeholder="What do you need to do?" />
+                    <button type="submit" id="todoAddBtn">➕ Add Task</button>
+                </form>
+
+                <ul class="todo-list" id="todoList"></ul>
+
+                <div class="todo-footer" id="todoFooter" hidden>
+                    <span id="todoCount"></span>
+                    <button type="button" class="todo-clear" id="todoClearBtn">Clear completed</button>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="page-footer">
+            Built with plain HTML, CSS &amp; JavaScript &bull; no frameworks, no build step &bull;
+            <a href="https://github.com/sandipkumarpaul/vanilla-js-widgets">Source on GitHub</a>
+        </footer>
+
+    </div>
+</body>
+</html>

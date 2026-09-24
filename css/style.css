@@ -1,0 +1,536 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f7fb;
+    color: #1e2a3a;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1.5rem 0;
+}
+
+button {
+    font-family: inherit;
+}
+
+button:focus-visible {
+    outline: 3px solid #2c5f8a;
+    outline-offset: 2px;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+    flex: 1;
+}
+
+/* ---------- Header / layout ---------- */
+
+.page-header {
+    text-align: center;
+    padding-bottom: 2rem;
+    border-bottom: 3px solid #d0dbe8;
+    margin-bottom: 2.5rem;
+}
+
+.page-header h1 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #0b2b44;
+    letter-spacing: -0.5px;
+}
+
+.page-header p {
+    font-size: 1.1rem;
+    color: #3e5a76;
+    margin-top: 0.3rem;
+}
+
+.widgets {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.task-section--wide {
+    grid-column: 1 / -1;
+}
+
+.task-section {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 20, 40, 0.08);
+    padding: 2rem 2.2rem;
+    border: 1px solid #e6edf4;
+    transition: box-shadow 0.2s;
+}
+
+.task-section:hover {
+    box-shadow: 0 12px 40px rgba(0, 20, 40, 0.12);
+}
+
+.task-section h2 {
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: #0b2b44;
+    margin-bottom: 0.4rem;
+}
+
+.task-desc {
+    color: #4a6580;
+    margin-bottom: 1.6rem;
+    font-size: 0.98rem;
+    border-left: 4px solid #b3c9dd;
+    padding-left: 1rem;
+}
+
+/* ---------- Fortune Generator ---------- */
+
+.fortune-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.fortune-box {
+    min-height: 140px;
+    padding: 1.6rem 2rem;
+    border-radius: 16px;
+    border: 3px solid #2c5f8a;
+    background: #eef4fa;
+    color: #0b2b44;
+    font-size: 1.15rem;
+    font-weight: 500;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 12px rgba(44, 95, 138, 0.10);
+    word-break: break-word;
+    line-height: 1.5;
+}
+
+.fortune-controls {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.7rem;
+}
+
+.fortune-controls button {
+    padding: 0.5rem 1.2rem;
+    border: 1px solid transparent;
+    border-radius: 40px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    background: #eef4fa;
+    color: #1e2a3a;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+}
+
+.fortune-controls button:hover {
+    background: #dce6f0;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(44, 95, 138, 0.12);
+}
+
+.fortune-controls button:active {
+    transform: translateY(0);
+}
+
+.fortune-controls .btn-new-fortune {
+    grid-column: 1 / -1;
+    background: #2c5f8a;
+    color: #fff;
+}
+.fortune-controls .btn-new-fortune:hover {
+    background: #1f4b6f;
+}
+
+.btn-font-color {
+    background: #dbeafe;
+    color: #1e4b7a;
+}
+.btn-font-color:hover {
+    background: #c0d9f5;
+}
+
+.btn-bg-color {
+    background: #e0f0e8;
+    color: #1a5a4a;
+}
+.btn-bg-color:hover {
+    background: #c6e4d8;
+}
+
+.btn-border-color {
+    background: #f0e8e0;
+    color: #7a4a1a;
+}
+.btn-border-color:hover {
+    background: #e6d8c8;
+}
+
+.btn-font-size {
+    background: #f0eaf5;
+    color: #5a3a7a;
+}
+.btn-font-size:hover {
+    background: #e2d8ec;
+}
+
+/* ---------- Stopwatch ---------- */
+
+.stopwatch {
+    text-align: center;
+}
+
+.stopwatch-display {
+    font-size: 5rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 2px;
+    line-height: 1.3;
+    color: #0b2b44;
+    background: #f0f5fa;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    display: inline-block;
+    min-width: 240px;
+    margin: 0.2rem 0 1rem;
+    border: 2px solid #d0dbe8;
+}
+
+.stopwatch-unit {
+    font-size: 0.4em;
+    font-weight: 600;
+    color: #5a6f85;
+    margin-left: 0.15em;
+}
+
+.stopwatch-progress {
+    height: 8px;
+    max-width: 320px;
+    margin: 0 auto 1rem;
+    background: #e6edf4;
+    border-radius: 99px;
+    overflow: hidden;
+}
+
+.stopwatch-progress-fill {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, #2c5f8a, #1f8b4c);
+    border-radius: inherit;
+    transition: width 0.3s ease;
+}
+
+.stopwatch-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.stopwatch-controls button {
+    padding: 0.6rem 2rem;
+    border: none;
+    border-radius: 40px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    min-width: 100px;
+}
+
+.stopwatch-controls button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+.stopwatch-controls button:active {
+    transform: translateY(0);
+}
+
+.btn-start {
+    background: #1f8b4c;
+    color: #fff;
+}
+.btn-start:hover {
+    background: #167a3f;
+}
+.btn-start:disabled {
+    background: #94b8a8;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.btn-stop {
+    background: #b13e3e;
+    color: #fff;
+}
+.btn-stop:hover {
+    background: #9a3333;
+}
+.btn-stop:disabled {
+    background: #c9a0a0;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.btn-reset {
+    background: #5a6f85;
+    color: #fff;
+}
+.btn-reset:hover {
+    background: #4a5d72;
+}
+
+.stopwatch-status {
+    font-size: 0.9rem;
+    color: #4a6580;
+    margin-top: 0.8rem;
+}
+
+/* ---------- To-Do List ---------- */
+
+.todo-input-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 1.6rem;
+}
+
+.todo-input-row input {
+    flex: 1 1 220px;
+    padding: 0.7rem 1.2rem;
+    border: 2px solid #d0dbe8;
+    border-radius: 40px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    outline: none;
+    transition: border 0.2s, box-shadow 0.2s;
+    background: #fafcfe;
+}
+
+.todo-input-row input:focus {
+    border-color: #2c5f8a;
+    box-shadow: 0 0 0 4px rgba(44, 95, 138, 0.12);
+}
+
+.todo-input-row button {
+    padding: 0.7rem 2rem;
+    border: none;
+    border-radius: 40px;
+    background: #2c5f8a;
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    box-shadow: 0 2px 8px rgba(44, 95, 138, 0.15);
+    white-space: nowrap;
+}
+
+.todo-input-row button:hover {
+    background: #1f4b6f;
+    transform: translateY(-2px);
+}
+.todo-input-row button:active {
+    transform: translateY(0);
+}
+
+.todo-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.7rem 1.2rem 0.7rem 1rem;
+    background: #f8fafc;
+    border-radius: 14px;
+    border: 1px solid #e6edf4;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.todo-item:hover {
+    background: #f0f5fa;
+    border-color: #c8d6e4;
+}
+
+.todo-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #2c5f8a;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.todo-item .task-text {
+    flex: 1;
+    font-size: 1rem;
+    word-break: break-word;
+    transition: color 0.2s;
+}
+
+.todo-item .task-text.completed {
+    text-decoration: line-through;
+    color: #8a9aac;
+}
+
+.todo-item .delete-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.3rem;
+    line-height: 1;
+    color: #b13e3e;
+    cursor: pointer;
+    padding: 0.2rem 0.5rem;
+    border-radius: 30px;
+    transition: background 0.15s, color 0.15s;
+    flex-shrink: 0;
+}
+
+.todo-item .delete-btn:hover {
+    background: #fce8e8;
+    color: #8a2a2a;
+}
+
+.todo-empty {
+    color: #8a9aac;
+    text-align: center;
+    padding: 1.2rem 0;
+    font-style: italic;
+}
+
+.todo-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #5a6f85;
+}
+
+.todo-clear {
+    background: none;
+    border: none;
+    color: #2c5f8a;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    border-radius: 6px;
+}
+
+.todo-clear:hover {
+    text-decoration: underline;
+}
+
+/* ---------- Footer ---------- */
+
+.page-footer {
+    text-align: center;
+    padding: 1.8rem 0 1rem;
+    border-top: 2px solid #d0dbe8;
+    color: #5a6f85;
+    font-size: 0.9rem;
+}
+
+.page-footer a {
+    color: #2c5f8a;
+    font-weight: 600;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 860px) {
+    .widgets {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 680px) {
+    body {
+        padding: 1.2rem 0.8rem 0;
+    }
+    .widgets {
+        gap: 1.5rem;
+    }
+    .task-section {
+        padding: 1.4rem 1.2rem;
+    }
+    .fortune-box {
+        min-height: 100px;
+        font-size: 1rem;
+        padding: 1.2rem;
+    }
+    .fortune-controls button {
+        padding: 0.4rem 0.9rem;
+        font-size: 0.8rem;
+    }
+    .stopwatch-display {
+        font-size: 3.6rem;
+        min-width: 160px;
+        padding: 0.2rem 0.8rem;
+    }
+    .stopwatch-controls button {
+        min-width: 70px;
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+    .page-header h1 {
+        font-size: 1.8rem;
+    }
+    .todo-input-row input {
+        flex: 1 1 140px;
+    }
+    .todo-input-row button {
+        padding: 0.6rem 1.2rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .stopwatch-controls,
+    .todo-input-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .stopwatch-controls button,
+    .todo-input-row input,
+    .todo-input-row button {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+}
